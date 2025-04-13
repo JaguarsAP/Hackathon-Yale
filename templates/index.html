@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QUBO Optimizer</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        table { border-collapse: collapse; margin: 10px 0; }
+        td, th { border: 1px solid #999; padding: 6px; text-align: center; }
+        input[type=number] { width: 60px; }
+    </style>
+</head>
+<body>
+    <h1>QUBO Sensor Deployment Optimizer</h1>
+    <form method="POST">
+        <label>Matrix Size: <input type="number" name="size" value="10" min="2" max="20"></label><br><br>
+        <label>Alpha (unit penalty): <input type="number" name="alpha" value="7" min="0" max="20"></label><br><br>
+        <label>Beta (adjacency penalty): <input type="number" name="beta" value="4" min="0" max="10"></label><br><br>
+        <button type="submit">Run Optimization</button>
+    </form>
+
+    {% if matrix %}
+        <h2>Wildfire Intensity Matrix</h2>
+        <table>
+        {% for row in matrix %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>
+        {% endfor %}
+        </table>
+
+        <h2>Optimized Deployment</h2>
+        <table>
+        {% for row in solution %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>
+        {% endfor %}
+        </table>
+
+        <p><strong>Energy:</strong> {{ energy }}</p>
+        <p><strong>Units Used:</strong> {{ units }}</p>
+    {% endif %}
+</body>
+</html>
+
